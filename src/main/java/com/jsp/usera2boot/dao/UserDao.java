@@ -1,5 +1,6 @@
 package com.jsp.usera2boot.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,18 @@ public class UserDao {
 			 return repo.save(user);
 		}
 		return null;
+	}
+
+	public List<User> findAllUser() {
+		return repo.findAll();
+	}
+
+	public List<User> findByName(String name) {
+	Optional<List<User>> optional=repo.findByName(name);
+	if(optional.isPresent()) {
+		return optional.get();
+	}
+	return null;
 	}
 
 	

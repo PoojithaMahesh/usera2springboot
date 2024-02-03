@@ -1,6 +1,9 @@
 package com.jsp.usera2boot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,23 +25,36 @@ public class UserController {
 	private UserService service;
 	
 	@PostMapping("/save")
-	public ResponseStructure<User> saveUser(@RequestBody User user) {
+	public ResponseEntity<ResponseStructure<User>> saveUser(@RequestBody User user) {
 		return service.saveUser(user);
 		
 	}
 	@GetMapping("/find")
-	public ResponseStructure<User> findUser(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<User>> findUser(@RequestParam int id) {
 		return service.findUser(id);
 	}
-	
-	
 	@DeleteMapping("/delete")
-	public ResponseStructure<User> deleteUser(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<User>> deleteUser(@RequestParam int id) {
 		return service.deleteUser(id);
 	}
 	@PutMapping("/update")
-	public ResponseStructure<User> updateUser(@RequestParam int id,@RequestBody User user) {
+	public ResponseEntity<ResponseStructure<User>> updateUser(@RequestParam int id,@RequestBody User user) {
 		return service.updateUser(id,user);
 	}
+	
+	@GetMapping("/findall")
+	public ResponseEntity<ResponseStructure<List<User>>> findAll(){
+		return service.findAllUser();
+	}
+	
+	@GetMapping("/findbyname")
+	public ResponseEntity<ResponseStructure<List<User>>> findByName(@RequestParam String name){
+		return service.findByName(name);
+	}
+	
+	
+	
+	
+	
 	
 }
